@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:diresto/data/model/restaurant.dart';
+import 'package:diresto/pages/route.dart' as route;
 
 class RestaurantItemWidget extends StatelessWidget {
   final RestaurantElement resto;
@@ -14,6 +15,9 @@ class RestaurantItemWidget extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
+            onTap: () {
+              Navigator.of(context).pushNamed(route.detailPage, arguments: resto);
+            },
             isThreeLine: true,
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(10),

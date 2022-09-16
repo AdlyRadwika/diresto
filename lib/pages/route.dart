@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:diresto/data/model/restaurant.dart';
+
 import 'package:diresto/pages/detail/detail_page.dart';
 import 'package:diresto/pages/list/list_page.dart';
 
@@ -11,7 +13,8 @@ Route<dynamic> controller (RouteSettings settings) {
     case listPage:
       return MaterialPageRoute(builder: (context) => const ListPage(),);
     case detailPage:
-      return MaterialPageRoute(builder: (context) => const DetailPage(),);
+      RestaurantElement resto = settings.arguments as RestaurantElement;
+      return MaterialPageRoute(builder: (context) => DetailPage(resto: resto),);
     default:
       throw('Page is not found!');
   }
