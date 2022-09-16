@@ -21,7 +21,12 @@ class RestaurantItemWidget extends StatelessWidget {
         ),
       ),
       title: Text(
-        resto.name
+        resto.name,
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          fontWeight: FontWeight.w600,
+        ),
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
       ),
       subtitle: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -32,7 +37,9 @@ class RestaurantItemWidget extends StatelessWidget {
               const Icon(Icons.location_on),
               const SizedBox(width: 3,),
               Text(
-                resto.city
+                resto.city,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               )
             ],
           ),

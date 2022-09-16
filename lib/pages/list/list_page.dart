@@ -27,8 +27,11 @@ class _ListPageState extends State<ListPage> {
             ? Center(
               child: EmptyWidget(
                 packageImage: PackageImage.Image_2,
+                hideBackgroundAnimation: true,
                 title: 'There is something wrong',
                 subTitle: snapshot.error.toString(),
+                titleTextStyle: Theme.of(context).textTheme.titleLarge,
+                subtitleTextStyle: Theme.of(context).textTheme.bodySmall,
               ),
             )
             : resto.isEmpty

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:diresto/pages/route.dart' as route;
+import 'package:diresto/utils/theme_util.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Diresto',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+          primary: primaryColor,
+          onPrimary: Colors.white,
+          secondary: secondaryColor,
+        ),
+        textTheme: myTextTheme,
       ),
       onGenerateRoute: route.controller,
       initialRoute: route.listPage,
