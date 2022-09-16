@@ -99,3 +99,12 @@ class Drink {
     "name": name,
   };
 }
+
+List<RestaurantElement> parseRestaurants (String? json) {
+  if (json == null) {
+    return [];
+  }
+
+  final List parsed = jsonDecode(json)['restaurants'];
+  return parsed.map((json) => RestaurantElement.fromJson(json)).toList();
+}
