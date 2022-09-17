@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         textTheme: myTextTheme,
       ),
       onGenerateRoute: route.controller,
-      initialRoute: route.listPage,
+      initialRoute: route.splashPage,
     );
   }
 }
