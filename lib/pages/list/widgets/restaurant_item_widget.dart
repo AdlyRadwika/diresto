@@ -19,12 +19,15 @@ class RestaurantItemWidget extends StatelessWidget {
               Navigator.of(context).pushNamed(route.detailPage, arguments: resto);
             },
             isThreeLine: true,
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                resto.pictureId,
-                width: 150,
-                fit: BoxFit.cover,
+            leading: Hero(
+              tag: resto.pictureId,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  resto.pictureId,
+                  width: 150,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             title: Text(

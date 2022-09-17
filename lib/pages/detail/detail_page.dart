@@ -20,6 +20,9 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Diresto's Detail Page"),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
