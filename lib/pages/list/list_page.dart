@@ -18,30 +18,32 @@ class _ListPageState extends State<ListPage> {
       appBar: AppBar(
         title: const Text('Diresto'),
       ),
-      body: FutureBuilder<String> (
-        future: 
-          DefaultAssetBundle.of(context).loadString('assets/restaurant.json'),
+      body: FutureBuilder<String>(
+        future:
+            DefaultAssetBundle.of(context).loadString('assets/restaurant.json'),
         builder: (context, snapshot) {
           final List<RestaurantElement> resto = parseRestaurants(snapshot.data);
           return snapshot.hasError
-            ? Center(
-              child: EmptyWidget(
-                packageImage: PackageImage.Image_2,
-                hideBackgroundAnimation: true,
-                title: 'There is something wrong',
-                subTitle: snapshot.error.toString(),
-                titleTextStyle: Theme.of(context).textTheme.titleLarge,
-                subtitleTextStyle: Theme.of(context).textTheme.bodySmall,
-              ),
-            )
-            : resto.isEmpty
-              ? const Center(child: CircularProgressIndicator(),)
-              : ListView.builder(
-                  itemCount: resto.length,
-                  itemBuilder: (context, index) {
-                    return RestaurantItemWidget(resto: resto[index]);
-                  },
-                );
+              ? Center(
+                  child: EmptyWidget(
+                    packageImage: PackageImage.Image_2,
+                    hideBackgroundAnimation: true,
+                    title: 'There is something wrong',
+                    subTitle: snapshot.error.toString(),
+                    titleTextStyle: Theme.of(context).textTheme.titleLarge,
+                    subtitleTextStyle: Theme.of(context).textTheme.bodySmall,
+                  ),
+                )
+              : resto.isEmpty
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      itemCount: resto.length,
+                      itemBuilder: (context, index) {
+                        return RestaurantItemWidget(resto: resto[index]);
+                      },
+                    );
         },
       ),
     );

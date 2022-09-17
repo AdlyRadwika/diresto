@@ -11,7 +11,8 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
       Timer(const Duration(seconds: 3), () {
-        Navigator.pushNamedAndRemoveUntil(context, route.listPage, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, route.listPage, (route) => false);
       });
     });
     return Scaffold(
@@ -23,15 +24,15 @@ class SplashPage extends StatelessWidget {
             Text(
               'Diresto',
               style: Theme.of(context).textTheme.headline6?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             Text(
               "Part of Dicoding (parody)",
               style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                color: Colors.white,
-              ),
+                    color: Colors.white,
+                  ),
             ),
           ],
         ),

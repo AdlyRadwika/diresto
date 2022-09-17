@@ -7,7 +7,12 @@ class MenuWidget extends StatelessWidget {
   final int index;
   final bool? isDrinks;
 
-  const MenuWidget({Key? key, required this.widget, required this.index, required this.isDrinks,}) : super(key: key);
+  const MenuWidget({
+    Key? key,
+    required this.widget,
+    required this.index,
+    required this.isDrinks,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +20,17 @@ class MenuWidget extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: isDrinks == true
-            ? Theme.of(context).colorScheme.secondary
-            : Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(10)
-      ),
-      child: Text( isDrinks == true
-        ? widget.resto.menus.drinks[index].name
-        : widget.resto.menus.foods[index].name,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.white
-        ),
+              ? Theme.of(context).colorScheme.secondary
+              : Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(10)),
+      child: Text(
+        isDrinks == true
+            ? widget.resto.menus.drinks[index].name
+            : widget.resto.menus.foods[index].name,
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: Colors.white),
       ),
     );
   }

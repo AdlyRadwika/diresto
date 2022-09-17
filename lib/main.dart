@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
       title: 'Diresto',
       theme: ThemeData(
         colorScheme: Theme.of(context).colorScheme.copyWith(
-          primary: primaryColor,
-          onPrimary: Colors.white,
-          secondary: secondaryColor,
-        ),
+              primary: primaryColor,
+              onPrimary: Colors.white,
+              secondary: secondaryColor,
+            ),
         textTheme: myTextTheme,
       ),
       onGenerateRoute: route.controller,

@@ -10,16 +10,22 @@ const listPage = 'list_page';
 const detailPage = 'detail_page';
 const splashPage = 'splash_page';
 
-Route<dynamic> controller (RouteSettings settings) {
+Route<dynamic> controller(RouteSettings settings) {
   switch (settings.name) {
     case listPage:
-      return MaterialPageRoute(builder: (context) => const ListPage(),);
+      return MaterialPageRoute(
+        builder: (context) => const ListPage(),
+      );
     case detailPage:
       RestaurantElement resto = settings.arguments as RestaurantElement;
-      return MaterialPageRoute(builder: (context) => DetailPage(resto: resto),);
+      return MaterialPageRoute(
+        builder: (context) => DetailPage(resto: resto),
+      );
     case splashPage:
-      return MaterialPageRoute(builder: (context) => const SplashPage(),);
+      return MaterialPageRoute(
+        builder: (context) => const SplashPage(),
+      );
     default:
-      throw('Page is not found!');
+      throw ('Page is not found!');
   }
 }

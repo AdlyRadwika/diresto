@@ -16,7 +16,8 @@ class RestaurantItemWidget extends StatelessWidget {
         children: [
           ListTile(
             onTap: () {
-              Navigator.of(context).pushNamed(route.detailPage, arguments: resto);
+              Navigator.of(context)
+                  .pushNamed(route.detailPage, arguments: resto);
             },
             isThreeLine: true,
             leading: Hero(
@@ -33,8 +34,8 @@ class RestaurantItemWidget extends StatelessWidget {
             title: Text(
               resto.name,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+                    fontWeight: FontWeight.w600,
+                  ),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),
@@ -48,7 +49,9 @@ class RestaurantItemWidget extends StatelessWidget {
                       Icons.location_on,
                       size: 20,
                     ),
-                    const SizedBox(width: 3,),
+                    const SizedBox(
+                      width: 3,
+                    ),
                     Text(
                       resto.city,
                       maxLines: 1,
@@ -63,7 +66,9 @@ class RestaurantItemWidget extends StatelessWidget {
                       Icons.star,
                       size: 20,
                     ),
-                    const SizedBox(width: 3,),
+                    const SizedBox(
+                      width: 3,
+                    ),
                     Text(
                       resto.rating.toString(),
                     )
@@ -75,7 +80,7 @@ class RestaurantItemWidget extends StatelessWidget {
           const Divider(
             height: 2,
           ),
-        ] ,
+        ],
       ),
     );
   }

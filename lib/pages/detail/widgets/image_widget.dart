@@ -10,7 +10,6 @@ class ImageWidget extends StatelessWidget {
     required this.widget,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
