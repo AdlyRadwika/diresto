@@ -197,6 +197,7 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Column _buildMenuColumn(BuildContext context, RestaurantDetailList resto) {
+    var mergedMenu = [...resto.menus.foods, ...resto.menus.drinks];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -216,32 +217,9 @@ class _DetailPageState extends State<DetailPage> {
               crossAxisCount: 3,
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
-              itemCount: resto.menus.foods.length,
+              itemCount: mergedMenu.length,
               itemBuilder: (context, index) {
-                return MenuWidget(
-                  widget: widget,
-                  resto: resto,
-                  index: index,
-                  isDrinks: false,
-                );
-              },
-            ),
-            const Divider(),
-            MasonryGridView.count(
-              padding: const EdgeInsets.all(0),
-              shrinkWrap: true,
-              primary: false,
-              crossAxisCount: 3,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-              itemCount: resto.menus.drinks.length,
-              itemBuilder: (context, index) {
-                return MenuWidget(
-                  widget: widget,
-                  resto: resto,
-                  index: index,
-                  isDrinks: true,
-                );
+                return MenuWidget(widget: widget,menu: mergedMenu, index: index,);
               },
             ),
           ],

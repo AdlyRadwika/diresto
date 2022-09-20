@@ -5,16 +5,14 @@ import '../detail_page.dart';
 
 class MenuWidget extends StatelessWidget {
   final DetailPage widget;
-  final RestaurantDetailList resto;
+  final List<Category> menu;
   final int index;
-  final bool? isDrinks;
 
   const MenuWidget({
     Key? key,
     required this.widget,
-    required this.resto,
+    required this.menu,
     required this.index,
-    required this.isDrinks,
   }) : super(key: key);
 
   @override
@@ -22,14 +20,10 @@ class MenuWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: isDrinks == true
-              ? Theme.of(context).colorScheme.secondary
-              : Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(10),),
       child: Text(
-        isDrinks == true
-            ? resto.menus.drinks[index].name
-            : resto.menus.foods[index].name,
+        menu[index].name,
         style: Theme.of(context)
             .textTheme
             .bodyMedium
