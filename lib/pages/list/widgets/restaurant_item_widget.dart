@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:diresto/data/api/api_service.dart';
 import 'package:diresto/data/model/restaurant.dart';
 import 'package:diresto/pages/route.dart' as route;
 
 class RestaurantItemWidget extends StatelessWidget {
-  final RestaurantElement resto;
+  final RestaurantClass resto;
 
   const RestaurantItemWidget({Key? key, required this.resto}) : super(key: key);
 
@@ -25,7 +26,7 @@ class RestaurantItemWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  resto.pictureId,
+                  ApiService().restaurantImage('small', resto.pictureId),
                   width: 150,
                   fit: BoxFit.cover,
                 ),

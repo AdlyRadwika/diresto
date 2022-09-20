@@ -1,6 +1,9 @@
+import 'package:diresto/provider/restaurant_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:empty_widget/empty_widget.dart';
+import 'package:provider/provider.dart';
 
+import 'package:diresto/data/api/api_service.dart';
 import 'package:diresto/data/model/restaurant.dart';
 import 'package:diresto/pages/list/widgets/restaurant_item_widget.dart';
 
@@ -12,40 +15,56 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+  late Future<Restaurant> _restaurant;
+
+  @override
+  void initState() {
+    super.initState();
+    _restaurant = ApiService().restaurantList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Diresto'),
       ),
-      body: FutureBuilder<String>(
-        future:
-            DefaultAssetBundle.of(context).loadString('assets/restaurant.json'),
-        builder: (context, snapshot) {
-          final List<RestaurantElement> resto = parseRestaurants(snapshot.data);
-          return snapshot.hasError
-              ? Center(
-                  child: EmptyWidget(
-                    packageImage: PackageImage.Image_2,
-                    hideBackgroundAnimation: true,
-                    title: 'There is something wrong',
-                    subTitle: snapshot.error.toString(),
-                    titleTextStyle: Theme.of(context).textTheme.titleLarge,
-                    subtitleTextStyle: Theme.of(context).textTheme.bodySmall,
-                  ),
-                )
-              : resto.isEmpty
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : ListView.builder(
-                      itemCount: resto.length,
-                      itemBuilder: (context, index) {
-                        return RestaurantItemWidget(resto: resto[index]);
-                      },
-                    );
-        },
-      ),
+      body: _buildList(context),
     );
   }
+}
+
+Widget _buildList(BuildContext context) {
+  return Consumer<RestaurantProvider>(
+    builder: (context, state, _) {
+      if(state.state == ResultState.hasData) {
+        return ListView.builder(
+          itemCount: state.result.restaurants.length,
+          itemBuilder: (context, index) {
+            return RestaurantItemWidget(resto: state.result.restaurants[index]);
+          },
+        );
+      } else if (state.state == ResultState.loading) {
+        return const Center(child: CircularProgressIndicator(),);
+      } else if (state.state == ResultState.noData) {
+        return Center(
+          child: Material(
+            child: Text(state.message),
+          ),
+        );
+      } else if (state.state == ResultState.error) {
+        return Center(
+          child: EmptyWidget(
+            packageImage: PackageImage.Image_2,
+            hideBackgroundAnimation: true,
+            title: 'There is something wrong',
+            subTitle: state.message,
+            titleTextStyle: Theme.of(context).textTheme.titleLarge,
+            subtitleTextStyle: Theme.of(context).textTheme.bodySmall,
+          ),
+        );
+      }
+      return const Center(child: CircularProgressIndicator(),);
+    },
+  );
 }

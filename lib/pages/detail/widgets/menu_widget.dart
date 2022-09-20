@@ -25,8 +25,8 @@ class MenuWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),),
       child: Text(
         isDrinks == true
-            ? widget.resto.menus.drinks[index].name
-            : widget.resto.menus.foods[index].name,
+            ? widget.resto.menus!.drinks[index].name
+            : widget.resto.menus!.foods[index].name,
         style: Theme.of(context)
             .textTheme
             .bodyMedium

@@ -6,7 +6,7 @@ import 'package:diresto/pages/detail/widgets/menu_widget.dart';
 import 'package:diresto/pages/detail/widgets/image_widget.dart';
 
 class DetailPage extends StatefulWidget {
-  final RestaurantElement resto;
+  final RestaurantClass resto;
 
   const DetailPage({Key? key, required this.resto}) : super(key: key);
 
@@ -180,7 +180,7 @@ class _DetailPageState extends State<DetailPage> {
               crossAxisCount: 3,
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
-              itemCount: widget.resto.menus.foods.length,
+              itemCount: widget.resto.menus!.foods.length,
               itemBuilder: (context, index) {
                 return MenuWidget(
                   widget: widget,
@@ -197,7 +197,7 @@ class _DetailPageState extends State<DetailPage> {
               crossAxisCount: 3,
               crossAxisSpacing: 5,
               mainAxisSpacing: 5,
-              itemCount: widget.resto.menus.drinks.length,
+              itemCount: widget.resto.menus!.drinks.length,
               itemBuilder: (context, index) {
                 return MenuWidget(
                   widget: widget,
