@@ -6,7 +6,7 @@ import 'package:diresto/pages/detail/widgets/menu_widget.dart';
 import 'package:diresto/pages/detail/widgets/image_widget.dart';
 
 class DetailPage extends StatefulWidget {
-  final RestaurantClass resto;
+  final RestaurantDetail resto;
 
   const DetailPage({Key? key, required this.resto}) : super(key: key);
 

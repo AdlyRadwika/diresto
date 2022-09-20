@@ -17,7 +17,7 @@ Route<dynamic> controller(RouteSettings settings) {
         builder: (context) => const ListPage(),
       );
     case detailPage:
-      RestaurantClass resto = settings.arguments as RestaurantClass;
+      RestaurantDetail resto = settings.arguments as RestaurantDetail;
       return MaterialPageRoute(
         builder: (context) => DetailPage(resto: resto),
       );

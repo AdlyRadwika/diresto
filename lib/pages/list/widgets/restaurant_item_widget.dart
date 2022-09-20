@@ -5,7 +5,7 @@ import 'package:diresto/data/model/restaurant.dart';
 import 'package:diresto/pages/route.dart' as route;
 
 class RestaurantItemWidget extends StatelessWidget {
-  final RestaurantClass resto;
+  final RestaurantList resto;
 
   const RestaurantItemWidget({Key? key, required this.resto}) : super(key: key);
 
