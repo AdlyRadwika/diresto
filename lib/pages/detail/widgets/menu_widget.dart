@@ -22,7 +22,7 @@ class MenuWidget extends StatelessWidget {
           color: isDrinks == true
               ? Theme.of(context).colorScheme.secondary
               : Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(10),),
       child: Text(
         isDrinks == true
             ? widget.resto.menus.drinks[index].name

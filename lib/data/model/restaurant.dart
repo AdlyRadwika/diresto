@@ -70,12 +70,12 @@ class Menus {
     required this.drinks,
   });
 
-  final List<Drink> foods;
-  final List<Drink> drinks;
+  final List<FoodnBeverage> foods;
+  final List<FoodnBeverage> drinks;
 
   factory Menus.fromJson(Map<String, dynamic> json) => Menus(
-    foods: List<Drink>.from(json["foods"].map((x) => Drink.fromJson(x))),
-    drinks: List<Drink>.from(json["drinks"].map((x) => Drink.fromJson(x))),
+    foods: List<FoodnBeverage>.from(json["foods"].map((x) => FoodnBeverage.fromJson(x))),
+    drinks: List<FoodnBeverage>.from(json["drinks"].map((x) => FoodnBeverage.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -84,14 +84,14 @@ class Menus {
   };
 }
 
-class Drink {
-  Drink({
+class FoodnBeverage {
+  FoodnBeverage({
     required this.name,
   });
 
   final String name;
 
-  factory Drink.fromJson(Map<String, dynamic> json) => Drink(
+  factory FoodnBeverage.fromJson(Map<String, dynamic> json) => FoodnBeverage(
     name: json["name"],
   );
 
