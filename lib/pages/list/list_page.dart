@@ -35,7 +35,7 @@ class _ListPageState extends State<ListPage> {
 }
 
 Widget _buildList(BuildContext context) {
-  return Consumer<RestaurantProvider>(
+  return Consumer<RestaurantListProvider>(
     builder: (context, state, _) {
       if(state.state == ResultState.hasData) {
         return ListView.builder(

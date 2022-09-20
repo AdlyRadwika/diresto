@@ -18,7 +18,7 @@ class RestaurantItemWidget extends StatelessWidget {
           ListTile(
             onTap: () {
               Navigator.of(context)
-                  .pushNamed(route.detailPage, arguments: resto);
+                  .pushNamed(route.detailPage, arguments: resto.id);
             },
             isThreeLine: true,
             leading: Hero(

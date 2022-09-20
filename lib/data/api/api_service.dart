@@ -24,4 +24,13 @@ class ApiService {
     final url = "$_baseUrl/$_images/$imageSize/$pictureId";
     return url;
   }
+
+  Future<RestaurantDetail> restaurantDetail(String id) async {
+    final response = await http.get(Uri.parse("$_baseUrl/$_detail/$id"));
+    if (response.statusCode == 200) {
+      return RestaurantDetail.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load the restaurant detail');
+    }
+  }
 }

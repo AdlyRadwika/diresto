@@ -1,7 +1,7 @@
-import 'package:diresto/data/api/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:diresto/data/api/api_service.dart';
 import 'package:diresto/pages/route.dart' as route;
 import 'package:diresto/utils/theme_util.dart';
 import 'package:diresto/provider/restaurant_provider.dart';
@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<RestaurantProvider>(
-      create: (context) => RestaurantProvider(apiService: ApiService()),
+    return ChangeNotifierProvider<RestaurantListProvider>(
+      create: (context) => RestaurantListProvider(apiService: ApiService()),
       child: MaterialApp(
         title: 'Diresto',
         theme: ThemeData(

@@ -1,8 +1,6 @@
 import 'package:diresto/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
-import 'package:diresto/data/model/restaurant.dart';
-
 import 'package:diresto/pages/detail/detail_page.dart';
 import 'package:diresto/pages/list/list_page.dart';
 
@@ -17,9 +15,9 @@ Route<dynamic> controller(RouteSettings settings) {
         builder: (context) => const ListPage(),
       );
     case detailPage:
-      RestaurantDetail resto = settings.arguments as RestaurantDetail;
+      String restoId = settings.arguments as String;
       return MaterialPageRoute(
-        builder: (context) => DetailPage(resto: resto),
+        builder: (context) => DetailPage(restaurantId: restoId),
       );
     case splashPage:
       return MaterialPageRoute(
