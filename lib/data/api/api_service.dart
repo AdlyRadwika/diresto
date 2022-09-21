@@ -33,4 +33,13 @@ class ApiService {
       throw Exception('Failed to load the restaurant detail');
     }
   }
+
+  Future<RestaurantSearch> restaurantSearch(String query) async {
+    final response = await http.get(Uri.parse("$_baseUrl/$_search$query"));
+    if (response.statusCode == 200) {
+      return RestaurantSearch.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('The page is currently empty start by searching the name, category, and menu.');
+    }
+  }
 }

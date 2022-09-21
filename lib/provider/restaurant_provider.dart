@@ -7,6 +7,7 @@ enum ResultState { loading, noData, hasData, error }
 
 late Restaurant _restaurant;
 late RestaurantDetail _restaurantDetail;
+late RestaurantSearch _restaurantSearch;
 late ResultState _state;
 String _message = '';
 
@@ -79,5 +80,47 @@ class RestaurantDetailProvider extends ChangeNotifier {
       notifyListeners();
       return _message = 'Error -> $e';
     }
+  }
+}
+
+class RestaurantSearchProvider extends ChangeNotifier {
+  final ApiService apiService;
+  String? query;
+
+  RestaurantSearchProvider({required this.apiService, this.query}) {
+    _fetchRestaurantSearch(query!);
+  }
+
+  String get message => _message;
+
+  RestaurantSearch get result => _restaurantSearch;
+
+  ResultState get state => _state;
+
+  Future<dynamic> _fetchRestaurantSearch(String query) async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+      final restaurant = await apiService.restaurantSearch(query);
+      if (restaurant.restaurants.isEmpty) {
+        _state = ResultState.noData;
+        notifyListeners();
+        return _message = '"$query" is not included in any restaurant. Start searching by name, category, and menu.';
+      } else {
+        _state = ResultState.hasData;
+        notifyListeners();
+        return _restaurantSearch = restaurant;
+      }
+    } catch (e) {
+      _state = ResultState.error;
+      notifyListeners();
+      return _message = 'Error -> $e';
+    }
+  }
+
+  searchTheRestaurant(String query) {
+    this.query = query;
+    _fetchRestaurantSearch(this.query!);
+    notifyListeners();
   }
 }

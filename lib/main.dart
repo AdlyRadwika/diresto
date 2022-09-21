@@ -26,6 +26,11 @@ class MyApp extends StatelessWidget {
                 secondary: secondaryColor,
               ),
           textTheme: myTextTheme,
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: Colors.white,
+            selectionColor: Colors.white.withOpacity(0.5),
+            selectionHandleColor: Colors.grey,
+          )
         ),
         onGenerateRoute: route.controller,
         initialRoute: route.splashPage,
