@@ -212,3 +212,24 @@ class RestaurantSearch {
                 restaurant.pictureId != null)),
       );
 }
+
+class RestaurantReview {
+  RestaurantReview({
+    required this.error,
+    required this.message,
+    required this.customerReviews,
+  });
+
+  final bool error;
+  final String message;
+  final List<CustomerReview> customerReviews;
+
+  factory RestaurantReview.fromJson(Map<String, dynamic> json) =>
+      RestaurantReview(
+        error: json["error"],
+        message: json["message"],
+        customerReviews: List<CustomerReview>.from(
+            (json["customerReviews"] as List)
+                .map((e) => RestaurantDetailList.fromJson(e))),
+      );
+}

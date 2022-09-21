@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:diresto/provider/restaurant_provider.dart';
 import '../../data/api/api_service.dart';
 import '../../data/model/restaurant.dart';
+import 'package:diresto/widget/review_widget.dart';
+import 'package:diresto/pages/route.dart' as route;
 import 'package:diresto/pages/detail/widgets/menu_widget.dart';
 import 'package:diresto/pages/detail/widgets/image_widget.dart';
 
@@ -64,13 +66,19 @@ class _DetailPageState extends State<DetailPage> {
                       height: 15,
                     ),
                     _buildMenuColumn(context, state.result.restaurant),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    _buildReviewColumn(context, state.result.restaurant),
                   ],
                 ),
               ),
             ],
           );
         } else if (state.state == ResultState.loading) {
-          return const Center(child: CircularProgressIndicator(),);
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         } else if (state.state == ResultState.noData) {
           return Center(
             child: Material(
@@ -89,7 +97,9 @@ class _DetailPageState extends State<DetailPage> {
             ),
           );
         }
-        return const Center(child: CircularProgressIndicator(),);
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
@@ -144,20 +154,23 @@ class _DetailPageState extends State<DetailPage> {
         const SizedBox(
           width: 3,
         ),
-        Text(
-          resto.city,
-          style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                fontSize: 16,
-                color: Colors.black.withOpacity(0.65),
-              ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        Flexible(
+          child: Text(
+            "${resto.address}, ${resto.city}",
+            style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  fontSize: 16,
+                  color: Colors.black.withOpacity(0.65),
+                ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         )
       ],
     );
   }
 
-  Column _buildDescriptionColumn(BuildContext context, RestaurantDetailList resto) {
+  Column _buildDescriptionColumn(
+      BuildContext context, RestaurantDetailList resto) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -219,10 +232,51 @@ class _DetailPageState extends State<DetailPage> {
               mainAxisSpacing: 5,
               itemCount: mergedMenu.length,
               itemBuilder: (context, index) {
-                return MenuWidget(widget: widget,menu: mergedMenu, index: index,);
+                return MenuWidget(
+                  menu: mergedMenu[index],
+                );
               },
             ),
           ],
+        ),
+      ],
+    );
+  }
+
+  Column _buildReviewColumn(BuildContext context, RestaurantDetailList resto) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Review',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, route.reviewPage, arguments: resto),
+              style: TextButton.styleFrom(
+                foregroundColor: Theme.of(context).colorScheme.secondary,
+                surfaceTintColor: Theme.of(context).colorScheme.secondary,
+              ),
+              child: const Text('View all'),
+            )
+          ],
+        ),
+        ListView.builder(
+          primary: false,
+          shrinkWrap: true,
+          itemCount: resto.customerReviews.length <= 2
+              ? resto.customerReviews.length
+              : 2,
+          itemBuilder: (context, index) {
+            return ReviewWidget(
+              review: resto.customerReviews[index],
+            );
+          },
         ),
       ],
     );

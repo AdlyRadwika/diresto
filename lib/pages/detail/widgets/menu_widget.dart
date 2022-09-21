@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../data/model/restaurant.dart';
-import '../detail_page.dart';
 
 class MenuWidget extends StatelessWidget {
-  final DetailPage widget;
-  final List<Category> menu;
-  final int index;
+  final Category menu;
 
   const MenuWidget({
     Key? key,
-    required this.widget,
     required this.menu,
-    required this.index,
   }) : super(key: key);
 
   @override
@@ -23,7 +18,7 @@ class MenuWidget extends StatelessWidget {
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(10),),
       child: Text(
-        menu[index].name,
+        menu.name,
         style: Theme.of(context)
             .textTheme
             .bodyMedium
