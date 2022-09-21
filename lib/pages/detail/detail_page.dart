@@ -269,6 +269,7 @@ class _DetailPageState extends State<DetailPage> {
         ListView.builder(
           primary: false,
           shrinkWrap: true,
+          reverse: true,
           itemCount: resto.customerReviews.length <= 2
               ? resto.customerReviews.length
               : 2,

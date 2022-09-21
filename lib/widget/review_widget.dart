@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../data/model/restaurant.dart';
 
-
 class ReviewWidget extends StatelessWidget {
   final CustomerReview review;
 
@@ -38,16 +37,16 @@ class ReviewWidget extends StatelessWidget {
             ),
             Text(
               review.date,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: Colors.white
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Colors.white.withOpacity(0.50)
               ),
             ),
           ],
         ),
         subtitle: Text(
           review.review,
-          style: TextStyle(
-            color: Colors.white.withOpacity(0.75)
+          style: const TextStyle(
+            color: Colors.white
           ),
         ),
       ),

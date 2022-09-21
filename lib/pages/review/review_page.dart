@@ -37,6 +37,7 @@ class ReviewPage extends StatelessWidget {
               ListView.builder(
                 primary: false,
                 shrinkWrap: true,
+                reverse: true,
                 itemCount: state.result.restaurant.customerReviews.length,
                 itemBuilder: (context, index) {
                   return ReviewWidget(
