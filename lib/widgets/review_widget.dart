@@ -28,26 +28,25 @@ class ReviewWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
-              child: Text(
-                review.name,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white
-                ),
-              )
-            ),
+                child: Text(
+              review.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(color: Colors.white),
+            )),
             Text(
               review.date,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withOpacity(0.50)
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: Colors.white.withOpacity(0.50)),
             ),
           ],
         ),
         subtitle: Text(
           review.review,
-          style: const TextStyle(
-            color: Colors.white
-          ),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

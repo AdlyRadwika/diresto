@@ -27,16 +27,13 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Diresto'),
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.pushNamed(context, route.searchPage),
-            icon: const Icon(Icons.search),
-            tooltip: 'Search',
-          ),
-        ]
-      ),
+      appBar: AppBar(title: const Text('Diresto'), actions: [
+        IconButton(
+          onPressed: () => Navigator.pushNamed(context, route.searchPage),
+          icon: const Icon(Icons.search),
+          tooltip: 'Search',
+        ),
+      ]),
       body: _buildList(context),
     );
   }
@@ -45,7 +42,7 @@ class _ListPageState extends State<ListPage> {
 Widget _buildList(BuildContext context) {
   return Consumer<RestaurantListProvider>(
     builder: (context, state, _) {
-      if(state.state == ResultState.hasData) {
+      if (state.state == ResultState.hasData) {
         return ListView.builder(
           itemCount: state.result.restaurants.length,
           itemBuilder: (context, index) {
@@ -53,7 +50,9 @@ Widget _buildList(BuildContext context) {
           },
         );
       } else if (state.state == ResultState.loading) {
-        return const Center(child: CircularProgressIndicator(),);
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       } else if (state.state == ResultState.noData) {
         return Center(
           child: Material(
@@ -72,7 +71,9 @@ Widget _buildList(BuildContext context) {
           ),
         );
       }
-      return const Center(child: CircularProgressIndicator(),);
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     },
   );
 }

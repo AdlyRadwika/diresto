@@ -8,7 +8,8 @@ class CustomTextField extends StatefulWidget {
   final String labelText;
   final String hintText;
 
-  const CustomTextField({Key? key,
+  const CustomTextField({
+    Key? key,
     required this.textEditingController,
     required this.emptyWarning,
     required this.hintText,
@@ -20,7 +21,6 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<RestaurantDetailProvider>(
@@ -38,8 +38,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           decoration: InputDecoration(
             isDense: true,
             border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10))
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(10))),
             hintText: widget.hintText,
             labelText: widget.labelText,
           ),

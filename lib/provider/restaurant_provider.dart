@@ -1,7 +1,9 @@
-import 'package:diresto/data/api/api_service.dart';
 import 'package:flutter/material.dart';
 
+import 'package:diresto/data/api/api_service.dart';
 import 'package:diresto/data/model/restaurant.dart';
+
+import '../utils/error_util.dart';
 
 enum ResultState { loading, noData, hasData, error }
 
@@ -43,7 +45,8 @@ class RestaurantListProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
-      return _message = 'Error -> $e';
+      _message = ErrorUtil.convertErrorMessage('$e');
+      return _message;
     }
   }
 }
@@ -79,12 +82,15 @@ class RestaurantDetailProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
-      return _message = 'Error -> $e';
+      _message = ErrorUtil.convertErrorMessage('$e');
+      return _message;
     }
   }
 
-  Future<String> sendCustomerReview(String restoId, String username, String userReview) async {
-    final review = await apiService.postCustomerReview(restoId, username, userReview);
+  Future<String> sendCustomerReview(
+      String restoId, String username, String userReview) async {
+    final review =
+        await apiService.postCustomerReview(restoId, username, userReview);
     notifyListeners();
     return review;
   }
@@ -127,7 +133,8 @@ class RestaurantSearchProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
-      return _message = 'Error -> $e';
+      _message = ErrorUtil.convertErrorMessage('$e');
+      return _message;
     }
   }
 

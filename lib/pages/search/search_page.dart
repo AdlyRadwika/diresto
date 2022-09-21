@@ -1,11 +1,10 @@
-import 'package:diresto/data/api/api_service.dart';
-import 'package:diresto/provider/restaurant_provider.dart';
 import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
-
-import 'package:diresto/pages/search/widgets/search_field_widget.dart';
 import 'package:provider/provider.dart';
 
+import 'package:diresto/data/api/api_service.dart';
+import 'package:diresto/provider/restaurant_provider.dart';
+import 'package:diresto/pages/search/widgets/search_field_widget.dart';
 import '../../widgets/restaurant_item_widget.dart';
 
 class SearchPage extends StatefulWidget {
@@ -36,15 +35,18 @@ class _SearchPageState extends State<SearchPage> {
   Consumer<RestaurantSearchProvider> _buildSearchList() {
     return Consumer<RestaurantSearchProvider>(
       builder: (context, state, _) {
-        if(state.state == ResultState.hasData) {
+        if (state.state == ResultState.hasData) {
           return ListView.builder(
             itemCount: state.result.restaurants.length,
             itemBuilder: (context, index) {
-              return RestaurantItemWidget(resto: state.result.restaurants[index]);
+              return RestaurantItemWidget(
+                  resto: state.result.restaurants[index]);
             },
           );
         } else if (state.state == ResultState.loading) {
-          return const Center(child: CircularProgressIndicator(),);
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         } else if (state.state == ResultState.noData) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -67,7 +69,9 @@ class _SearchPageState extends State<SearchPage> {
             ),
           );
         }
-        return const Center(child: CircularProgressIndicator(),);
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

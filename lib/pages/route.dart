@@ -29,7 +29,9 @@ Route<dynamic> controller(RouteSettings settings) {
         builder: (context) => const SplashPage(),
       );
     case searchPage:
-      return MaterialPageRoute(builder: (context) => const SearchPage(),);
+      return MaterialPageRoute(
+        builder: (context) => const SearchPage(),
+      );
     case reviewPage:
       RestaurantDetailList resto = settings.arguments as RestaurantDetailList;
       return MaterialPageRoute(

@@ -257,7 +257,8 @@ class _DetailPageState extends State<DetailPage> {
                   ),
             ),
             TextButton(
-              onPressed: () => Navigator.pushNamed(context, route.reviewPage, arguments: resto),
+              onPressed: () => Navigator.pushNamed(context, route.reviewPage,
+                  arguments: resto),
               style: TextButton.styleFrom(
                 foregroundColor: Theme.of(context).colorScheme.secondary,
                 surfaceTintColor: Theme.of(context).colorScheme.secondary,

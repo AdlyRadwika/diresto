@@ -7,7 +7,7 @@ import 'package:diresto/pages/review/widgets/text_field_widget.dart';
 
 class InputReviewWidget extends StatefulWidget {
   final RestaurantDetailList resto;
-  
+
   const InputReviewWidget({Key? key, required this.resto}) : super(key: key);
 
   @override
@@ -27,8 +27,7 @@ class _InputReviewWidgetState extends State<InputReviewWidget> {
           padding: const EdgeInsets.all(10),
           child: Padding(
             padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom
-            ),
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Column(
               children: [
                 Form(
@@ -40,20 +39,22 @@ class _InputReviewWidgetState extends State<InputReviewWidget> {
                           textEditingController: _nameController,
                           emptyWarning: "Input the name",
                           hintText: "John",
-                          labelText: "Name"
+                          labelText: "Name"),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      const SizedBox(height: 10,),
                       CustomTextField(
                           textEditingController: _reviewController,
                           emptyWarning: "Input the review",
                           hintText: "This restaurant is fire!",
-                          labelText: "Review"
+                          labelText: "Review"),
+                      const SizedBox(
+                        height: 15,
                       ),
-                      const SizedBox(height: 15,),
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            if(_inputKey.currentState!.validate()) {
+                            if (_inputKey.currentState!.validate()) {
                               _submitReviewData();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -85,8 +86,6 @@ class _InputReviewWidgetState extends State<InputReviewWidget> {
 
     Provider.of<RestaurantDetailProvider>(context, listen: false)
         .sendCustomerReview(idValue, nameValue, reviewValue);
-
-
 
     Navigator.pop(context);
   }

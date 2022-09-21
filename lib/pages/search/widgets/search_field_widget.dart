@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../data/api/api_service.dart';
 import '../../../provider/restaurant_provider.dart';
 
 class SearchFieldWidget extends StatelessWidget {

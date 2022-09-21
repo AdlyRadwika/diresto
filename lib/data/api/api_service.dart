@@ -39,19 +39,15 @@ class ApiService {
     if (response.statusCode == 200) {
       return RestaurantSearch.fromJson(json.decode(response.body));
     } else {
-      throw Exception('The page is currently empty start by searching the name, category, and menu.');
+      throw Exception(
+          'The page is currently empty start by searching the name, category, and menu.');
     }
   }
-  
-  Future<String> postCustomerReview(String id, String name, String review) async {
-    final response = await http.post(
-      Uri.parse("$_baseUrl/$_review"),
-      body: {
-        "id" : id,
-        "name" : name,
-        "review" : review
-      }
-    );
+
+  Future<String> postCustomerReview(
+      String id, String name, String review) async {
+    final response = await http.post(Uri.parse("$_baseUrl/$_review"),
+        body: {"id": id, "name": name, "review": review});
     if (response.statusCode == 201) {
       return response.body;
     } else {

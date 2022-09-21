@@ -20,18 +20,17 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Diresto',
         theme: ThemeData(
-          colorScheme: Theme.of(context).colorScheme.copyWith(
-                primary: primaryColor,
-                onPrimary: Colors.white,
-                secondary: secondaryColor,
-              ),
-          textTheme: myTextTheme,
-          textSelectionTheme: TextSelectionThemeData(
-            cursorColor: Colors.white,
-            selectionColor: Colors.white.withOpacity(0.5),
-            selectionHandleColor: Colors.grey,
-          )
-        ),
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+                  primary: primaryColor,
+                  onPrimary: Colors.white,
+                  secondary: secondaryColor,
+                ),
+            textTheme: myTextTheme,
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: Colors.white,
+              selectionColor: Colors.white.withOpacity(0.5),
+              selectionHandleColor: Colors.grey,
+            )),
         onGenerateRoute: route.controller,
         initialRoute: route.splashPage,
       ),
