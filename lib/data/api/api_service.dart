@@ -46,11 +46,11 @@ class ApiService {
   Future<String> postCustomerReview(String id, String name, String review) async {
     final response = await http.post(
       Uri.parse("$_baseUrl/$_review"),
-      body: jsonEncode(<String, String>{
+      body: {
         "id" : id,
         "name" : name,
         "review" : review
-      })
+      }
     );
     if (response.statusCode == 201) {
       return response.body;

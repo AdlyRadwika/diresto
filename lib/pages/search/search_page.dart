@@ -3,10 +3,10 @@ import 'package:diresto/provider/restaurant_provider.dart';
 import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'package:diresto/pages/search/widget/search_field_widget.dart';
+import 'package:diresto/pages/search/widgets/search_field_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../../widget/restaurant_item_widget.dart';
+import '../../widgets/restaurant_item_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);

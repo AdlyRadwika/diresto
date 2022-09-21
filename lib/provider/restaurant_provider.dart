@@ -14,7 +14,9 @@ String _message = '';
 class RestaurantListProvider extends ChangeNotifier {
   final ApiService apiService;
 
-  RestaurantListProvider({required this.apiService,}) {
+  RestaurantListProvider({
+    required this.apiService,
+  }) {
     _fetchRestaurantList();
   }
 
@@ -44,14 +46,13 @@ class RestaurantListProvider extends ChangeNotifier {
       return _message = 'Error -> $e';
     }
   }
-
 }
 
 class RestaurantDetailProvider extends ChangeNotifier {
   final ApiService apiService;
   final String? restaurantId;
 
-  RestaurantDetailProvider({required this.apiService, this.restaurantId,}) {
+  RestaurantDetailProvider({required this.apiService, this.restaurantId}) {
     _fetchRestaurantDetail(restaurantId!);
   }
 
@@ -81,6 +82,17 @@ class RestaurantDetailProvider extends ChangeNotifier {
       return _message = 'Error -> $e';
     }
   }
+
+  Future<String> sendCustomerReview(String restoId, String username, String userReview) async {
+    final review = await apiService.postCustomerReview(restoId, username, userReview);
+    notifyListeners();
+    return review;
+  }
+
+  fetchRestaurantDetailAgain(String restoId) {
+    _fetchRestaurantDetail(restoId);
+    notifyListeners();
+  }
 }
 
 class RestaurantSearchProvider extends ChangeNotifier {
@@ -105,7 +117,8 @@ class RestaurantSearchProvider extends ChangeNotifier {
       if (restaurant.restaurants.isEmpty) {
         _state = ResultState.noData;
         notifyListeners();
-        return _message = '"$query" is not included in any restaurant. Start searching by name, category, and menu.';
+        return _message =
+            '"$query" is not included in any restaurant. Start searching by name, category, and menu.';
       } else {
         _state = ResultState.hasData;
         notifyListeners();

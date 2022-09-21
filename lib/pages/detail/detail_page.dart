@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:diresto/provider/restaurant_provider.dart';
 import '../../data/api/api_service.dart';
 import '../../data/model/restaurant.dart';
-import 'package:diresto/widget/review_widget.dart';
+import 'package:diresto/widgets/review_widget.dart';
 import 'package:diresto/pages/route.dart' as route;
 import 'package:diresto/pages/detail/widgets/menu_widget.dart';
 import 'package:diresto/pages/detail/widgets/image_widget.dart';
