@@ -4,8 +4,8 @@ import 'package:diresto/data/api/api_service.dart';
 import 'package:diresto/data/model/restaurant.dart';
 
 import '../utils/error_util.dart';
+import '../utils/result_state_util.dart';
 
-enum ResultState { loading, noData, hasData, error }
 
 late Restaurant _restaurant;
 late RestaurantDetail _restaurantDetail;

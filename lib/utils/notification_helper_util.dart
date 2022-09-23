@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:diresto/data/model/restaurant.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -20,7 +21,7 @@ class NotificationHelper {
   Future<void> initNotifications(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var initializationSettingsAndroid =
-    const AndroidInitializationSettings('app_icon');
+        const AndroidInitializationSettings('app_icon');
 
     var initializationSettingsIOS = const DarwinInitializationSettings(
       requestAlertPermission: false,
@@ -33,12 +34,12 @@ class NotificationHelper {
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: (NotificationResponse details) async {
-          final payload = details.payload;
-          if (payload != null) {
-            debugPrint('notification payload: $payload');
-          }
-          selectNotificationSubject.add(payload ?? 'empty payload');
-        });
+      final payload = details.payload;
+      if (payload != null) {
+        debugPrint('notification payload: $payload');
+      }
+      selectNotificationSubject.add(payload ?? 'empty payload');
+    });
   }
 
   Future<void> showNotification(
@@ -58,10 +59,14 @@ class NotificationHelper {
 
     var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+
+    var randomIndex = Random().nextInt(resto.restaurants.length);
+    var randomResto = resto.restaurants[randomIndex].name;
 
     var titleNotification = "<b>Recommended restaurant for you to eat!</b>";
-    var titleRestaurant = resto.restaurants[0].name;
+    var titleRestaurant = randomResto;
 
     await flutterLocalNotificationsPlugin.show(
         0, titleNotification, titleRestaurant, platformChannelSpecifics,
@@ -70,7 +75,7 @@ class NotificationHelper {
 
   void configureSelectNotificationSubject(String route) {
     selectNotificationSubject.stream.listen(
-          (String payload) async {
+      (String payload) async {
         var data = Restaurant.fromJson(json.decode(payload));
         var resto = data.restaurants[0].id;
         Navigation.intentWithData(route, resto);

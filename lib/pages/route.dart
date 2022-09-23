@@ -9,6 +9,8 @@ import 'package:diresto/pages/review/review_page.dart';
 import 'package:diresto/pages/home/home_page.dart';
 import 'package:diresto/pages/settings/settings_page.dart';
 
+import '../widgets/restaurant_item_widget.dart';
+
 const listPage = 'list_page';
 const detailPage = 'detail_page';
 const splashPage = 'splash_page';
@@ -24,9 +26,10 @@ Route<dynamic> controller(RouteSettings settings) {
         builder: (context) => const ListPage(),
       );
     case detailPage:
-      String restoId = settings.arguments as String;
+      DetailPageArguments arguments = settings.arguments as DetailPageArguments;
       return MaterialPageRoute(
-        builder: (context) => DetailPage(restaurantId: restoId),
+        builder: (context) =>
+            DetailPage(restaurantId: arguments.restoId, index: arguments.index),
       );
     case splashPage:
       return MaterialPageRoute(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../data/model/restaurant.dart';
+import '../../../widgets/custom_container_widget.dart';
 
 class MenuWidget extends StatelessWidget {
   final Category menu;
@@ -12,13 +13,10 @@ class MenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Text(
+    return CustomContainer(
+      usePrimaryBorder: false,
+      usePrimaryColor: true,
+      widget: Text(
         menu.name,
         style: Theme.of(context)
             .textTheme

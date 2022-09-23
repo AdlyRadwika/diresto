@@ -3,86 +3,134 @@ import 'package:flutter/material.dart';
 import 'package:diresto/data/api/api_service.dart';
 import 'package:diresto/data/model/restaurant.dart';
 import 'package:diresto/pages/route.dart' as route;
+import 'package:provider/provider.dart';
+
+import '../provider/database_provider.dart';
 
 class RestaurantItemWidget extends StatelessWidget {
   final RestaurantList resto;
+  final int? index;
 
-  const RestaurantItemWidget({Key? key, required this.resto}) : super(key: key);
+  const RestaurantItemWidget({Key? key, required this.resto, this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          ListTile(
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamed(route.detailPage, arguments: resto.id);
-            },
-            isThreeLine: true,
-            leading: Hero(
-              tag: resto.pictureId,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  ApiService().restaurantImage('small', resto.pictureId),
-                  width: 150,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            title: Text(
-              resto.name,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-            subtitle: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(
-                      Icons.location_on,
-                      size: 20,
+    return Consumer<DatabaseProvider>(
+      builder: (context, provider, child) {
+        return FutureBuilder<bool>(
+          future: provider.isFavorite(resto.id),
+          builder: (context, snapshot) {
+            var isFavorite = snapshot.data ?? false;
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      DetailPageArguments arguments =
+                          DetailPageArguments(restoId: resto.id, index: index!);
+                      Navigator.of(context)
+                          .pushNamed(route.detailPage, arguments: arguments);
+                    },
+                    isThreeLine: true,
+                    leading: Hero(
+                      tag: resto.pictureId,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          ApiService()
+                              .restaurantImage('small', resto.pictureId),
+                          width: 150,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                    const SizedBox(
-                      width: 3,
-                    ),
-                    Text(
-                      resto.city,
-                      maxLines: 1,
+                    title: Text(
+                      resto.name,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
                       overflow: TextOverflow.ellipsis,
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(
-                      Icons.star,
-                      size: 20,
+                      maxLines: 1,
                     ),
-                    const SizedBox(
-                      width: 3,
+                    subtitle: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.location_on,
+                              size: 20,
+                            ),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              resto.city,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              size: 20,
+                            ),
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            Text(
+                              resto.rating.toString(),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
-                    Text(
-                      resto.rating.toString(),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const Divider(
-            height: 2,
-          ),
-        ],
-      ),
+                    trailing: isFavorite
+                        ? IconButton(
+                            onPressed: () {
+                              provider.removeFavorite(resto.id);
+                            },
+                            icon: const Icon(
+                              Icons.favorite,
+                              size: 26,
+                              color: Colors.redAccent,
+                            ),
+                            splashColor: Colors.transparent,
+                          )
+                        : IconButton(
+                            onPressed: () {
+                              provider.addFavorite(resto);
+                            },
+                            icon: const Icon(
+                              Icons.favorite_border,
+                              size: 26,
+                              color: Colors.redAccent,
+                            ),
+                            splashColor: Colors.transparent,
+                          ),
+                  ),
+                  const Divider(
+                    height: 2,
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
+}
+
+class DetailPageArguments {
+  final String restoId;
+  final int index;
+
+  DetailPageArguments({required this.restoId, required this.index});
 }

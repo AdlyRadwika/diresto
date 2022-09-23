@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:diresto/data/db/database_helper.dart';
 import 'package:diresto/data/preferences/preferences_helper.dart';
+import 'package:diresto/provider/database_provider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +17,6 @@ import 'package:diresto/utils/background_service_util.dart';
 import 'package:diresto/utils/notification_helper_util.dart';
 import 'package:diresto/utils/theme_util.dart';
 import 'package:diresto/pages/route.dart' as route;
-
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -55,6 +56,11 @@ class MyApp extends StatelessWidget {
           create: (_) => PreferencesProvider(
               preferencesHelper: PreferencesHelper(
                   sharedPreferences: SharedPreferences.getInstance())),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DatabaseProvider(
+            databaseHelper: DatabaseHelper.instance,
+          ),
         ),
       ],
       child: MaterialApp(

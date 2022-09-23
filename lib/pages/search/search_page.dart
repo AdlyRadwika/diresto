@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:diresto/data/api/api_service.dart';
 import 'package:diresto/provider/restaurant_provider.dart';
 import 'package:diresto/pages/search/widgets/search_field_widget.dart';
+import '../../utils/result_state_util.dart';
 import '../../widgets/restaurant_item_widget.dart';
 
 class SearchPage extends StatefulWidget {

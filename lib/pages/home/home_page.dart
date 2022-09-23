@@ -1,3 +1,4 @@
+import 'package:diresto/pages/favorite/favorite_page.dart';
 import 'package:flutter/material.dart';
 import '../../utils/notification_helper_util.dart';
 import 'package:diresto/pages/route.dart' as route;
@@ -20,12 +21,15 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _listWidget = [
     const ListPage(),
+    const FavoritePage(),
     const SettingsPage(),
   ];
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = [
     const BottomNavigationBarItem(
         icon: Icon(Icons.restaurant), label: 'Restaurants'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.favorite), label: 'Favorites'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.settings), label: 'Settings'),
   ];

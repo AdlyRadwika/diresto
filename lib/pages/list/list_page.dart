@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:diresto/pages/route.dart' as route;
 import 'package:diresto/provider/restaurant_provider.dart';
 import 'package:diresto/widgets/restaurant_item_widget.dart';
+import '../../utils/result_state_util.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({Key? key}) : super(key: key);
@@ -36,7 +37,10 @@ Widget _buildList(BuildContext context) {
         return ListView.builder(
           itemCount: state.result.restaurants.length,
           itemBuilder: (context, index) {
-            return RestaurantItemWidget(resto: state.result.restaurants[index]);
+            return RestaurantItemWidget(
+              resto: state.result.restaurants[index],
+              index: index,
+            );
           },
         );
       } else if (state.state == ResultState.loading) {

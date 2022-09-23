@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'package:diresto/provider/restaurant_provider.dart';
 import '../../../data/model/restaurant.dart';
+import '../../../utils/result_state_util.dart';
 import '../detail_page.dart';
 
 class ImageWidget extends StatelessWidget {

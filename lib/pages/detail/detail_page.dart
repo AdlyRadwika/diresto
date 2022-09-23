@@ -1,3 +1,4 @@
+import 'package:diresto/provider/database_provider.dart';
 import 'package:empty_widget/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -10,11 +11,15 @@ import 'package:diresto/widgets/review_widget.dart';
 import 'package:diresto/pages/route.dart' as route;
 import 'package:diresto/pages/detail/widgets/menu_widget.dart';
 import 'package:diresto/pages/detail/widgets/image_widget.dart';
+import '../../utils/result_state_util.dart';
+import '../../widgets/custom_container_widget.dart';
 
 class DetailPage extends StatefulWidget {
   final String restaurantId;
+  final int index;
 
-  const DetailPage({Key? key, required this.restaurantId}) : super(key: key);
+  const DetailPage({Key? key, required this.restaurantId, required this.index})
+      : super(key: key);
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -57,7 +62,7 @@ class _DetailPageState extends State<DetailPage> {
                     const SizedBox(
                       height: 5,
                     ),
-                    _buildLocationRow(context, state.result.restaurant),
+                    _buildScrollableRow(context, state.result.restaurant),
                     const SizedBox(
                       height: 15,
                     ),
@@ -104,68 +109,128 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Row _buildTitleRow(BuildContext context, RestaurantDetailList resto) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          child: Text(
-            resto.name,
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                ?.copyWith(fontWeight: FontWeight.bold),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const Icon(
-              Icons.star,
-              size: 30,
-              color: Colors.orangeAccent,
-            ),
-            const SizedBox(
-              width: 3,
-            ),
-            Text(
-              resto.rating.toString(),
-              style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                    fontSize: 18,
-                  ),
-            )
-          ],
-        ),
-      ],
+  Consumer _buildTitleRow(BuildContext context, RestaurantDetailList resto) {
+    return Consumer<RestaurantListProvider>(
+      builder: (context, value, _) {
+        return Consumer<DatabaseProvider>(
+          builder: (context, provider, child) {
+            return FutureBuilder<bool>(
+              future: provider.isFavorite(resto.id),
+              builder: (context, snapshot) {
+                var isFavorite = snapshot.data ?? false;
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        resto.name,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    isFavorite
+                        ? IconButton(
+                            onPressed: () {
+                              provider.removeFavorite(resto.id);
+                            },
+                            icon: const Icon(
+                              Icons.favorite,
+                              size: 30,
+                              color: Colors.redAccent,
+                            ),
+                            splashColor: Colors.transparent,
+                          )
+                        : IconButton(
+                            onPressed: () {
+                              provider.addFavorite(
+                                  value.result.restaurants[widget.index]);
+                            },
+                            icon: const Icon(
+                              Icons.favorite_border,
+                              size: 30,
+                              color: Colors.redAccent,
+                            ),
+                            splashColor: Colors.transparent,
+                          ),
+                  ],
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 
-  Row _buildLocationRow(BuildContext context, RestaurantDetailList resto) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          Icons.location_on,
-          size: 24,
-          color: Colors.black.withOpacity(0.65),
+  SingleChildScrollView _buildScrollableRow(
+      BuildContext context, RestaurantDetailList resto) {
+    return SingleChildScrollView(
+      primary: false,
+      scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
+      child: SizedBox(
+        height: 50,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CustomContainer(
+              usePrimaryBorder: true,
+              usePrimaryColor: false,
+              widget: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.star,
+                    size: 24,
+                    color: Colors.orangeAccent,
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  Text(
+                    resto.rating.toString(),
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        fontSize: 16, color: Colors.black.withOpacity(0.65)),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            CustomContainer(
+              usePrimaryBorder: true,
+              usePrimaryColor: false,
+              widget: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.location_on,
+                    size: 24,
+                    color: Colors.black.withOpacity(0.65),
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  Text(
+                    "${resto.address}, ${resto.city}",
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                          fontSize: 16,
+                          color: Colors.black.withOpacity(0.65),
+                        ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
-        const SizedBox(
-          width: 3,
-        ),
-        Flexible(
-          child: Text(
-            "${resto.address}, ${resto.city}",
-            style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                  fontSize: 16,
-                  color: Colors.black.withOpacity(0.65),
-                ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        )
-      ],
+      ),
     );
   }
 
