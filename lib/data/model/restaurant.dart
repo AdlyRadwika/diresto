@@ -12,17 +12,12 @@ class Restaurant {
   final List<RestaurantList> restaurants;
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
-        error: json["error"],
-        message: json["message"],
-        count: json["count"],
-        restaurants: List<RestaurantList>.from((json["restaurants"] as List)
-            .map((e) => RestaurantList.fromJson(e))
-            .where((restaurant) =>
-                restaurant.name != null &&
-                restaurant.city != null &&
-                restaurant.rating != null &&
-                restaurant.pictureId != null)),
-      );
+      error: json["error"],
+      message: json["message"],
+      count: json["count"],
+      restaurants: List<RestaurantList>.from((json["restaurants"] as List)
+          .map((e) => RestaurantList.fromJson(e)))
+  );
 }
 
 class RestaurantList {

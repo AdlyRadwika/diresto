@@ -16,14 +16,6 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  late Future<Restaurant> _restaurant;
-
-  @override
-  void initState() {
-    super.initState();
-    _restaurant = ApiService().restaurantList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
