@@ -60,7 +60,7 @@ class NotificationHelper {
     var platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
 
-    var titleNotification = "<b>Diresto's Recommendation</b>";
+    var titleNotification = "<b>Recommended restaurant for you to eat!</b>";
     var titleRestaurant = resto.restaurants[0].name;
 
     await flutterLocalNotificationsPlugin.show(
