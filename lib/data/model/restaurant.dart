@@ -16,8 +16,14 @@ class Restaurant {
       message: json["message"],
       count: json["count"],
       restaurants: List<RestaurantList>.from((json["restaurants"] as List)
-          .map((e) => RestaurantList.fromJson(e)))
-  );
+          .map((e) => RestaurantList.fromJson(e))));
+
+  Map<String, dynamic> toJson() => {
+        "error": error,
+        "message": message,
+        "count": count,
+        "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
+      };
 }
 
 class RestaurantList {
@@ -45,6 +51,15 @@ class RestaurantList {
         pictureId: json["pictureId"],
         rating: json["rating"].toDouble(),
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "pictureId": pictureId,
+        "city": city,
+        "rating": rating,
+      };
 }
 
 class RestaurantDetail {
@@ -63,6 +78,12 @@ class RestaurantDetail {
           error: json["error"],
           message: json["message"],
           restaurant: RestaurantDetailList.fromJson(json["restaurant"]));
+
+  Map<String, dynamic> toJson() => {
+        "error": error,
+        "message": message,
+        "restaurant": restaurant.toJson(),
+      };
 }
 
 class RestaurantDetailList {
@@ -196,16 +217,10 @@ class RestaurantSearch {
 
   factory RestaurantSearch.fromJson(Map<String, dynamic> json) =>
       RestaurantSearch(
-        error: json["error"],
-        founded: json["founded"],
-        restaurants: List<RestaurantList>.from((json["restaurants"] as List)
-            .map((e) => RestaurantList.fromJson(e))
-            .where((restaurant) =>
-                restaurant.name != null &&
-                restaurant.city != null &&
-                restaurant.rating != null &&
-                restaurant.pictureId != null)),
-      );
+          error: json["error"],
+          founded: json["founded"],
+          restaurants: List<RestaurantList>.from((json["restaurants"] as List)
+              .map((e) => RestaurantList.fromJson(e))));
 }
 
 class RestaurantReview {

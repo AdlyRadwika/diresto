@@ -1,11 +1,9 @@
-import 'package:diresto/provider/restaurant_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:empty_widget/empty_widget.dart';
 import 'package:provider/provider.dart';
 
-import 'package:diresto/data/api/api_service.dart';
-import 'package:diresto/data/model/restaurant.dart';
 import 'package:diresto/pages/route.dart' as route;
+import 'package:diresto/provider/restaurant_provider.dart';
 import 'package:diresto/widgets/restaurant_item_widget.dart';
 
 class ListPage extends StatefulWidget {

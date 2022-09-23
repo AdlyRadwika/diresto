@@ -12,7 +12,7 @@ class SplashPage extends StatelessWidget {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((timeStamp) {
       Timer(const Duration(seconds: 3), () {
         Navigator.pushNamedAndRemoveUntil(
-            context, route.listPage, (route) => false);
+            context, route.homePage, (route) => false);
       });
     });
     return Scaffold(
