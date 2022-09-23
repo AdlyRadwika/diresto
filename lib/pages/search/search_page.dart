@@ -41,7 +41,9 @@ class _SearchPageState extends State<SearchPage> {
             itemCount: state.result.restaurants.length,
             itemBuilder: (context, index) {
               return RestaurantItemWidget(
-                  resto: state.result.restaurants[index]);
+                resto: state.result.restaurants[index],
+                index: index,
+              );
             },
           );
         } else if (state.state == ResultState.loading) {

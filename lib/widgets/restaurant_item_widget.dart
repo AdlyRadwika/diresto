@@ -9,9 +9,9 @@ import '../provider/database_provider.dart';
 
 class RestaurantItemWidget extends StatelessWidget {
   final RestaurantList resto;
-  final int? index;
+  final int index;
 
-  const RestaurantItemWidget({Key? key, required this.resto, this.index})
+  const RestaurantItemWidget({Key? key, required this.resto, required this.index})
       : super(key: key);
 
   @override

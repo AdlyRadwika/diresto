@@ -25,7 +25,12 @@ class _ListPageState extends State<ListPage> {
           tooltip: 'Search',
         ),
       ]),
-      body: _buildList(context),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<RestaurantListProvider>().fetchRestaurantList();
+        },
+        child: _buildList(context),
+      ),
     );
   }
 }

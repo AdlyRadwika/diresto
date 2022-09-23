@@ -30,7 +30,7 @@ class DatabaseProvider extends ChangeNotifier {
       _state = ResultState.hasData;
     } else {
       _state = ResultState.noData;
-      _message = 'There is no data';
+      _message = 'The favorite page is currently empty. Start by add your favorite restaurant.';
     }
     notifyListeners();
   }
