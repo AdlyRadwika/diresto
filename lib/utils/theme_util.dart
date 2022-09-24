@@ -50,6 +50,9 @@ ThemeData myThemeData = ThemeData(
       selectionColor: Colors.white.withOpacity(0.5),
       selectionHandleColor: Colors.grey,
     ),
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: myColorScheme.primary,
       selectedItemColor: myColorScheme.onPrimary,

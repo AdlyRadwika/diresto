@@ -6,12 +6,14 @@ import 'package:diresto/pages/route.dart' as route;
 import 'package:provider/provider.dart';
 
 import '../provider/database_provider.dart';
+import '../utils/navigation_util.dart';
 
 class RestaurantItemWidget extends StatelessWidget {
   final RestaurantList resto;
   final int index;
 
-  const RestaurantItemWidget({Key? key, required this.resto, required this.index})
+  const RestaurantItemWidget(
+      {Key? key, required this.resto, required this.index})
       : super(key: key);
 
   @override
@@ -30,8 +32,7 @@ class RestaurantItemWidget extends StatelessWidget {
                     onTap: () {
                       DetailPageArguments arguments =
                           DetailPageArguments(restoId: resto.id, index: index);
-                      Navigator.of(context)
-                          .pushNamed(route.detailPage, arguments: arguments);
+                      Navigation.intentWithData(route.detailPage, arguments);
                     },
                     isThreeLine: true,
                     leading: Hero(
@@ -104,6 +105,7 @@ class RestaurantItemWidget extends StatelessWidget {
                               color: Colors.redAccent,
                             ),
                             splashColor: Colors.transparent,
+                            tooltip: 'Favorite',
                           )
                         : IconButton(
                             onPressed: () {
@@ -115,6 +117,7 @@ class RestaurantItemWidget extends StatelessWidget {
                               color: Colors.redAccent,
                             ),
                             splashColor: Colors.transparent,
+                            tooltip: 'Favorite',
                           ),
                   ),
                   const Divider(

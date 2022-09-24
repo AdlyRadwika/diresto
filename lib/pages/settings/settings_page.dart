@@ -1,7 +1,10 @@
-import 'package:diresto/provider/preferences_provider.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
+import 'package:diresto/provider/preferences_provider.dart';
+import 'package:diresto/utils/date_time_helper_util.dart';
 import '../../provider/scheduling_provider.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -32,9 +35,64 @@ class SettingsPage extends StatelessWidget {
                     return Switch.adaptive(
                       value: provider.isDailyRestaurantActive,
                       onChanged: (value) async {
-                        scheduled.scheduledRestaurant(value);
-                        provider.enableDailyRestaurant(value);
+                        if (Platform.isAndroid) {
+                          scheduled.scheduledRestaurant(value);
+                          provider.enableDailyRestaurant(value);
+                          if (value) {
+                            var time = DateTimeHelper.format();
+                            var formattedTime =
+                                DateFormat('hh:mm a').format(time);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'You will be notified everyday at $formattedTime',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .caption
+                                      ?.copyWith(
+                                        color: Colors.white,
+                                      ),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                duration: const Duration(seconds: 1),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "You won't get any notification",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .caption
+                                      ?.copyWith(
+                                        color: Colors.white,
+                                      ),
+                                ),
+                                behavior: SnackBarBehavior.floating,
+                                duration: const Duration(seconds: 1),
+                              ),
+                            );
+                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'This feature is currently not available',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .caption
+                                    ?.copyWith(
+                                      color: Colors.white,
+                                    ),
+                              ),
+                              behavior: SnackBarBehavior.floating,
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
+                        }
                       },
+                      activeColor: Theme.of(context).colorScheme.primary,
                     );
                   },
                 ),

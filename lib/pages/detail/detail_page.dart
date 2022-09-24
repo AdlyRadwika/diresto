@@ -143,6 +143,7 @@ class _DetailPageState extends State<DetailPage> {
                               color: Colors.redAccent,
                             ),
                             splashColor: Colors.transparent,
+                            tooltip: 'Favorite',
                           )
                         : IconButton(
                             onPressed: () {
@@ -155,6 +156,7 @@ class _DetailPageState extends State<DetailPage> {
                               color: Colors.redAccent,
                             ),
                             splashColor: Colors.transparent,
+                            tooltip: 'Favorite',
                           ),
                   ],
                 );
