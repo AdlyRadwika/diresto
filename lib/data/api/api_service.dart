@@ -1,9 +1,16 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart' show Client;
 
 import 'package:diresto/data/model/restaurant.dart';
 
 class ApiService {
+  Client? client;
+
+  ApiService({
+    this.client,
+  });
+
   static const String _baseUrl = 'https://restaurant-api.dicoding.dev';
   static const String _list = 'list';
   static const String _images = 'images';
@@ -53,5 +60,10 @@ class ApiService {
     } else {
       throw Exception('Failed to send a review');
     }
+  }
+
+  Future<Restaurant> testFetchRestaurantList() async {
+    final responseSample = await client?.get(Uri.parse("$_baseUrl/$_list"));
+    return Restaurant.fromJson(json.decode(responseSample!.body));
   }
 }
