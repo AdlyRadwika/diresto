@@ -29,7 +29,7 @@ class RestaurantItemWidget extends StatelessWidget {
                   ListTile(
                     onTap: () {
                       DetailPageArguments arguments =
-                          DetailPageArguments(restoId: resto.id, index: index!);
+                          DetailPageArguments(restoId: resto.id, index: index);
                       Navigator.of(context)
                           .pushNamed(route.detailPage, arguments: arguments);
                     },
@@ -62,13 +62,14 @@ class RestaurantItemWidget extends StatelessWidget {
                           children: [
                             const Icon(
                               Icons.location_on,
-                              size: 20,
+                              size: 18,
                             ),
                             const SizedBox(
-                              width: 3,
+                              width: 2,
                             ),
                             Text(
                               resto.city,
+                              style: Theme.of(context).textTheme.caption,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -79,13 +80,14 @@ class RestaurantItemWidget extends StatelessWidget {
                           children: [
                             const Icon(
                               Icons.star,
-                              size: 20,
+                              size: 18,
                             ),
                             const SizedBox(
-                              width: 3,
+                              width: 2,
                             ),
                             Text(
                               resto.rating.toString(),
+                              style: Theme.of(context).textTheme.caption,
                             )
                           ],
                         ),

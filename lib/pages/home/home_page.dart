@@ -1,9 +1,8 @@
-import 'package:diresto/pages/favorite/favorite_page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:diresto/pages/favorite/favorite_page.dart';
 import '../../utils/notification_helper_util.dart';
 import 'package:diresto/pages/route.dart' as route;
-
-import '../../utils/theme_util.dart';
 import '../list/list_page.dart';
 import '../settings/settings_page.dart';
 
@@ -56,7 +55,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _listWidget[_bottomNavIndex],
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: secondaryColor,
         currentIndex: _bottomNavIndex,
         items: _bottomNavBarItems,
         onTap: _onBottomNavTapped,
