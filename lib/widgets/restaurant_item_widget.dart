@@ -56,21 +56,20 @@ class RestaurantItemWidget extends StatelessWidget {
                       maxLines: 1,
                     ),
                     subtitle: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Icon(
                               Icons.location_on,
-                              size: 18,
+                              size: 16,
                             ),
                             const SizedBox(
-                              width: 2,
+                              width: 1,
                             ),
                             Text(
                               resto.city,
-                              style: Theme.of(context).textTheme.caption,
+                              style: Theme.of(context).textTheme.overline,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -81,14 +80,14 @@ class RestaurantItemWidget extends StatelessWidget {
                           children: [
                             const Icon(
                               Icons.star,
-                              size: 18,
+                              size: 16,
                             ),
                             const SizedBox(
-                              width: 2,
+                              width: 1,
                             ),
                             Text(
                               resto.rating.toString(),
-                              style: Theme.of(context).textTheme.caption,
+                              style: Theme.of(context).textTheme.overline,
                             )
                           ],
                         ),
