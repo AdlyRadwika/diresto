@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:diresto/pages/route.dart' as route;
 import 'package:diresto/data/model/restaurant.dart';
 import 'package:diresto/provider/restaurant_provider.dart';
 import 'package:diresto/pages/review/widgets/text_field_widget.dart';
@@ -88,6 +89,7 @@ class _InputReviewWidgetState extends State<InputReviewWidget> {
         .sendCustomerReview(idValue, nameValue, reviewValue);
 
     Navigator.pop(context);
+    Navigator.pushReplacementNamed(context, route.reviewPage, arguments: widget.resto);
   }
 
   @override
